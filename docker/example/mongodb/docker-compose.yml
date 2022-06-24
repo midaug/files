@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mongodb:
+    command: "bash /tools/run.sh"
+    container_name: mongodb
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=root@123
+    - MONGO_RS_HOST=127.0.0.1 #副本集ip，要提供给外部访问时，用主机的局域网ip
+    - MONGO_RS_PORT=27017 #副本集端口，与暴露端口对应
+    image: mongo:4.4.6
+    network_mode: bridge
+    ports:
+    - 27017:27017/tcp
+    restart: always
+    volumes:
+    - ./data:/data/db:rw  #数据文件夹可以备份
+    - ./tools:/tools:rw  #工具脚本，对mongo官方镜像在部署时初始化副本集的配置
