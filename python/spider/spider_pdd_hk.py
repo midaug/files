@@ -72,7 +72,7 @@ def start(token, sendkey, ss):
     # 推送消息
     if len(rs) > 0:
         sp = '%0D%0A' #推送的换行符
-        url = 'https://push.100180.xyz:48190/wecomchan?sendkey=' + sendkey + '&msg_type=text&msg=pdd-hk ['+str(ss)+'s]  ' + now.strftime(tformat) + sp + sp
+        url = 'https://push.100180.xyz/wecomchan?sendkey=' + sendkey + '&msg_type=text&msg=pdd-hk ['+str(ss)+'s]  ' + now.strftime(tformat) + sp + sp
         msg = sp.join(rs)
         resp = requests.get(url + msg, timeout=(10, 10), auth=HTTPBasicAuth("admin", token), verify=False)
         if resp.status_code != 200 and resp.status_code != 201:  #推送失败视为整体失败，下次执行时任然可以拉取
