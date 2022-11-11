@@ -30,12 +30,12 @@ jobs:
         # 寻找上一次执行的 number 值，用以cache的匹配
         run: |
           echo "$GITHUB_RUN_NUMBER"
-          echo "::set-output name=number1::$((GITHUB_RUN_NUMBER - 1))"
-          echo "::set-output name=number2::$((GITHUB_RUN_NUMBER - 2))"
-          echo "::set-output name=number3::$((GITHUB_RUN_NUMBER - 3))"
-          echo "::set-output name=number4::$((GITHUB_RUN_NUMBER - 4))"
-          echo "::set-output name=number5::$((GITHUB_RUN_NUMBER - 5))"
-          echo "::set-output name=number::$GITHUB_RUN_NUMBER"
+          echo "number1=$((GITHUB_RUN_NUMBER - 1))" >> $GITHUB_OUTPUT
+          echo "number2=$((GITHUB_RUN_NUMBER - 2))" >> $GITHUB_OUTPUT
+          echo "number3=$((GITHUB_RUN_NUMBER - 3))" >> $GITHUB_OUTPUT
+          echo "number4=$((GITHUB_RUN_NUMBER - 4))" >> $GITHUB_OUTPUT
+          echo "number5=$((GITHUB_RUN_NUMBER - 5))" >> $GITHUB_OUTPUT
+          echo "number=$GITHUB_RUN_NUMBER" >> $GITHUB_OUTPUT
         shell: bash        
       - name: Cache
         id: cache
