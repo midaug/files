@@ -28,7 +28,7 @@ su - root -s /bin/sh <<EOF
       echo "docker-compose 已存在 ~~~"
       docker-compose -v
     else
-      curl -L "https://gh.midaug.workers.dev/https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      curl -L "https://gitee.com/midaug/docker-compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       chmod +x /usr/local/bin/docker-compose
     fi
 EOF
