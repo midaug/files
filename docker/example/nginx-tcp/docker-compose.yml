@@ -1,53 +1,17 @@
-version: "3.6"
+version: '3'
+
 services:
-  nginx-tcp:
-    image: midaug/nginx:1.23.0-alpine
-    container_name: nginx-tcp
-    restart: always
+  npf:
+    image: nginx:1.25.3-alpine-slim
     network_mode: bridge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: sh -c "wget -qO- https://cdn.jsdelivr.net/gh/midaug/files@master/shell/apt/npf.sh | sh"
+    ports:
+      - "9999:9999"
+      - "9998:9998"
     environment:
       TZ: Asia/Shanghai
-      NGINX_CONF: >
-        user  nginx;   
-
-        worker_processes  auto;   
-
-        error_log  /var/log/nginx/error.log notice;   
-
-        pid        /var/run/nginx.pid;   
-
-        events {   
-            worker_connections  1024;   
-        }   
-
-        http {   
-            include       /etc/nginx/mime.types;   
-            default_type  application/octet-stream;   
-            #log_format  main  'xxxxxxxxxx';   
-            #access_log  /dev/stdout  main;   
-            sendfile        on;
-            #tcp_nopush     on;
-            keepalive_timeout  65;
-            #gzip  on;
-            #include /etc/nginx/conf.d/*.conf;
-        }   
-
-        stream {  
-            #docker-compose会对美元符解析成变量影响配置文件所以替换为@
-            log_format stream '@@remote_addr [@@time_local] '
-                        '@@protocol @@status @@bytes_sent @@bytes_received '
-                        '@@session_time "@@upstream_addr" '
-                        '"@@upstream_bytes_sent" "@@upstream_bytes_received" "@@upstream_connect_time"';
-            access_log /dev/stdout stream;
-            #在下面增加tcp转发配置，upstream里可多个地址负载均衡
-            upstream local_http {
-                server 10.0.0.1:80;
-            }   
-            server {
-                listen       48080;
-                proxy_pass   local_http;
-            }   
-        }   
-    ports:
-    - "48080:48080"
-    
+      STREAM_CONF: >
+        9999/host.docker.internal:8000;
+        9998/172.19.204.158:22;
