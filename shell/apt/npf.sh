@@ -39,7 +39,7 @@ http {
 }   
 stream {
     log_format stream '\$remote_addr [\$time_local] '
-           '\$protocol \$status br="\${bytes_received}" bs="\${bytes_sent}" '
+           '\$protocol \$status p="\$server_port" br="\${bytes_received}" bs="\${bytes_sent}" '
            'st="\$session_time" "\$upstream_addr" '
           '"\$upstream_connect_time"';
     access_log /dev/stdout stream;
