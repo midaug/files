@@ -8,10 +8,12 @@ services:
       - "host.docker.internal:host-gateway"
     command: sh -c "wget -qO- https://cdn.jsdelivr.net/gh/midaug/files@master/shell/apt/npf.sh | sh"
     ports:
-      - "9999:9999"
-      - "9998:9998"
+      - "9999:9999/tcp"
+      - "9998:9998/udp"
+      - "9998:9998/tcp"
     environment:
       TZ: Asia/Shanghai
       STREAM_CONF: >
-        9999/host.docker.internal:8000;
-        9998/172.19.204.158:22;
+        9999/host.docker.internal:8000/tcp;
+        9998/223.5.5.5:53/udp;
+        9998/host.docker.internal:8000/tcp;
