@@ -14,3 +14,4 @@ gitee国内镜像: https://gitee.com/midaug/files
 > 快速ping    
 > curl -s https://cdn.jsdelivr.net/gh/midaug/files/python/xping.py | python - baidu.com -c 30 -i 300    
 > curl -s https://gitee.com/midaug/files/raw/master/python/xping.py | python - baidu.com -c 30 -i 300
+> curl -s http://a.u9c.cn/5OiQLi | python - baidu.com -c 30 -i 300
