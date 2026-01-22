@@ -105,8 +105,8 @@ if [ "$DATA_COUNT" -gt 0 ]; then
         print "延迟百分位数(ms):"
         
         # 计算指定的百分位数
-        split("50 60 70 80 85 90 95 99", percentiles)
-        for (i in percentiles) {
+        n = split("50 60 70 80 85 90 95 99", percentiles)
+        for (i = 1; i <= n; i++) {
             p = percentiles[i]
             pos = p / 100 * (count - 1) + 1
             idx = int(pos)
